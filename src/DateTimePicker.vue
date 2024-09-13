@@ -2,99 +2,145 @@
 <template>
   <div class="dtp__container">
     <div class="dtp__row">
-    <div class="dtp__grid-container">
-      <!-- <div class="dtp__rollers up-rollers"> -->
-      <button id="dtp__year-up" class="dtp__grid-item" @click="increment('year')">
-        <span class="dtp__button-label">yr</span>
-        <v-icon>mdi-menu-up</v-icon>
-      </button>
-      <span></span>
-      <button id="dtp__month-up" class="dtp__grid-item" @click="increment('month')">
-        <span class="dtp__button-label">mo</span>
-        <v-icon>mdi-menu-up</v-icon>
-      </button>
-      <span></span>
-      <button id="dtp__day-up" class="dtp__grid-item" @click="increment('day')">
-        <span class="dtp__button-label">day</span>
-        <v-icon>mdi-menu-up</v-icon>
-      </button>
-      <slot name="top-middle"><span></span></slot>
-      <button id="dtp__hour-up" class="dtp__grid-item" @click="increment('hour')">
-        <span class="dtp__button-label">hr</span>
-        <v-icon>mdi-menu-up</v-icon>
-      </button>
-      <span></span>
-      <button id="dtp__minute-up" class="dtp__grid-item" @click="increment('minute')">
-        <span class="dtp__button-label">min</span>
-        <v-icon>mdi-menu-up</v-icon>
-      </button>
-      <span></span>
-      <button id="dtp__second-up" class="dtp__grid-item" @click="increment('second')">
-        <span class="dtp__button-label">sec</span>
-        <v-icon>mdi-menu-up</v-icon>
-      </button>
-      <!-- </div> -->
+      <div class="dtp__grid-container">
 
-      <!-- <span class="dtp__time-string"> -->
-      <!-- <span id="dtp__year" class="dtp__grid-item dtp__time_part">{{ year }}</span> -->
-      <tap-to-input :editable="props.editableTime" id="dtp__year" class="dtp__grid-item dtp__time_part" :min="limits.year.min" :max="limits.year.max" v-model="year" />
-      <span>-</span>
-      <!-- <span id="dtp__month" class="dtp__grid-item dtp__time_part">{{ pad2(month) }}</span> -->
-      <tap-to-input :editable="props.editableTime" id="dtp__month" class="dtp__grid-item dtp__time_part" :min="limits.month.min" :max="limits.month.max" pad2 v-model="month" />
-      <span>-</span>
-      <!-- <span id="dtp__day" class="dtp__grid-item dtp__time_part">{{ pad2(day) }}</span>  -->
-      <tap-to-input :editable="props.editableTime" id="dtp__day" class="dtp__grid-item dtp__time_part" :min="limits.day.min" :max="limits.day.max" pad2 v-model="day" />
-      <span class="dtp__middle-slot"><slot name="center-middle"></slot></span>
-      <!-- <span id="dtp__hour" class="dtp__grid-item dtp__time_part">{{ pad2(displayHour) }}</span> -->
-      <tap-to-input :editable="props.editableTime" id="dtp__hour" class="dtp__grid-item dtp__time_part" :min="limits.hour.min" :max="limits.hour.max" pad2 v-model="displayHour" />
-      <span>:</span>
-      <!-- <span id="dtp__minute" class="dtp__grid-item dtp__time_part">{{ pad2(minute) }}</span> -->
-      <tap-to-input :editable="props.editableTime" id="dtp__minute" class="dtp__grid-item dtp__time_part" :min="limits.minute.min" :max="limits.minute.max" pad2 v-model="minute" />
-      <span>:</span>
-      <!-- <span id="dtp__second" class="dtp__grid-item dtp__time_part">{{ pad2(second) }}</span> -->
-      <tap-to-input :editable="props.editableTime" id="dtp__second" class="dtp__grid-item dtp__time_part" :min="limits.second.min" :max="limits.second.max" pad2 v-model="second" />
-      <!-- </span> -->
+        <!-- 1-1 -->
+        <button id="dtp__year-up" class="dtp__grid-item" @click="increment('year')">
+          <span class="dtp__button-label">yr</span>
+          <v-icon>mdi-menu-up</v-icon>
+        </button>
+        <!-- 2-1 -->
+        <tap-to-input :editable="props.editableTime" id="dtp__year" class="dtp__grid-item dtp__time_part" :min="limits.year.min" :max="limits.year.max" v-model="year" />
+        <!-- 3-1 -->
+        <button id="dtp__year-up" class="dtp__grid-item" @click="decrement('year')">
+          <v-icon>mdi-menu-down</v-icon>
+        </button>
 
-      <button id="dtp__year-up" class="dtp__grid-item" @click="decrement('year')">
-        <v-icon>mdi-menu-down</v-icon>
-      </button>
-      <span></span>
-      <button id="dtp__month-up" class="dtp__grid-item" @click="decrement('month')">
-        <v-icon>mdi-menu-down</v-icon>
-      </button>
-      <slot name="bottom-middle"><span></span></slot>
-      <button id="dtp__day-up" class="dtp__grid-item" @click="decrement('day')">
-        <v-icon>mdi-menu-down</v-icon>
-      </button>
-      <span></span>
-      <button id="dtp__hour-up" class="dtp__grid-item" @click="decrement('hour')">
-        <v-icon>mdi-menu-down</v-icon>
-      </button>
-      <span></span>
-      <button id="dtp__minute-up" class="dtp__grid-item" @click="decrement('minute')">
-        <v-icon>mdi-menu-down</v-icon>
-      </button>
-      <span></span>
-      <button id="dtp__second-up" class="dtp__grid-item" @click="decrement('second')">
-        <v-icon>mdi-menu-down</v-icon>
-      </button>
+        <!-- 1-2 -->
+        <span></span>
+        <!-- 2-2 -->
+        <span>-</span>
+        <!-- 3-2 -->
+        <span></span>
+
+        <!-- 1-3 -->
+        <button id="dtp__month-up" class="dtp__grid-item" @click="increment('month')">
+          <span class="dtp__button-label">mo</span>
+          <v-icon>mdi-menu-up</v-icon>
+        </button>
+        <!-- 2-3 -->
+        <tap-to-input :editable="props.editableTime" id="dtp__month" class="dtp__grid-item dtp__time_part" :min="limits.month.min" :max="limits.month.max" pad2 v-model="month" />
+        <!-- 3-3 -->
+        <button id="dtp__month-up" class="dtp__grid-item" @click="decrement('month')">
+          <v-icon>mdi-menu-down</v-icon>
+        </button>
+
+        <!-- 1-4 -->
+        <span></span>
+        <!-- 2-4 -->
+        <span>-</span>
+        <!-- 3-4 -->
+        <slot name="bottom-middle"><span></span></slot>
+
+        <!-- 1-5 -->
+        <button id="dtp__day-up" class="dtp__grid-item" @click="increment('day')">
+          <span class="dtp__button-label">day</span>
+          <v-icon>mdi-menu-up</v-icon>
+        </button>
+        <!-- 2-5 -->
+        <tap-to-input :editable="props.editableTime" id="dtp__day" class="dtp__grid-item dtp__time_part" :min="limits.day.min" :max="limits.day.max" pad2 v-model="day" />
+        <!-- 3-5 -->
+        <button id="dtp__day-up" class="dtp__grid-item" @click="decrement('day')">
+          <v-icon>mdi-menu-down</v-icon>
+        </button>
+
+        <!-- 1-6 -->
+        <slot name="top-middle"><span></span></slot>
+        <!-- 2-6 -->
+        <span class="dtp__middle-slot"><slot name="center-middle"></slot></span>
+        <!-- 3-6 -->
+        <span></span>
+
+        <!-- 1-7 -->
+        <button id="dtp__hour-up" class="dtp__grid-item" @click="increment('hour')">
+          <span class="dtp__button-label">hr</span>
+          <v-icon>mdi-menu-up</v-icon>
+        </button>
+        <!-- 2-7 -->
+        <tap-to-input :editable="props.editableTime" id="dtp__hour" class="dtp__grid-item dtp__time_part" :min="limits.hour.min" :max="limits.hour.max" pad2 v-model="displayHour" />
+        <!-- 3-7 -->
+        <button id="dtp__hour-up" class="dtp__grid-item" @click="decrement('hour')">
+          <v-icon>mdi-menu-down</v-icon>
+        </button>
+
+        <!-- 1-8 -->
+        <span></span>
+        <!-- 2-8 -->
+        <span>:</span>
+        <!-- 3-8 -->
+        <span></span>
+
+        <!-- 1-9 -->
+        <button id="dtp__minute-up" class="dtp__grid-item" @click="increment('minute')">
+          <span class="dtp__button-label">min</span>
+          <v-icon>mdi-menu-up</v-icon>
+        </button>
+        <!-- 2-9 -->
+        <tap-to-input :editable="props.editableTime" id="dtp__minute" class="dtp__grid-item dtp__time_part" :min="limits.minute.min" :max="limits.minute.max" pad2 v-model="minute" />
+        <!-- 3-9 -->
+        <button id="dtp__minute-up" class="dtp__grid-item" @click="decrement('minute')">
+          <v-icon>mdi-menu-down</v-icon>
+        </button>
+
+        <!-- 1-10 -->
+        <span></span>
+        <!-- 2-10 -->
+        <span>:</span>
+        <!-- 3-10 -->
+        <span></span>
+
+        <!-- 1-11 -->
+        <button id="dtp__second-up" class="dtp__grid-item" @click="increment('second')">
+          <span class="dtp__button-label">sec</span>
+          <v-icon>mdi-menu-up</v-icon>
+        </button>
+        <!-- 2-11 -->
+        <tap-to-input :editable="props.editableTime" id="dtp__second" class="dtp__grid-item dtp__time_part" :min="limits.second.min" :max="limits.second.max" pad2 v-model="second" />
+        <!-- 3-11 -->
+        <button id="dtp__second-up" class="dtp__grid-item" @click="decrement('second')">
+          <v-icon>mdi-menu-down</v-icon>
+        </button>
+
+        <!-- <div class="dtp__rollers up-rollers"> -->
+        <!-- </div> -->
+
+        <!-- <span class="dtp__time-string"> -->
+        <!-- <span id="dtp__year" class="dtp__grid-item dtp__time_part">{{ year }}</span> -->
+
+        <!-- <span id="dtp__month" class="dtp__grid-item dtp__time_part">{{ pad2(month) }}</span> -->
+        <!-- <span id="dtp__day" class="dtp__grid-item dtp__time_part">{{ pad2(day) }}</span>  -->
+        <!-- <span id="dtp__hour" class="dtp__grid-item dtp__time_part">{{ pad2(displayHour) }}</span> -->
+        <!-- <span id="dtp__minute" class="dtp__grid-item dtp__time_part">{{ pad2(minute) }}</span> -->
+        <!-- <span id="dtp__second" class="dtp__grid-item dtp__time_part">{{ pad2(second) }}</span> -->
+        <!-- </span> -->
+
+      </div>
+      
+      <div class="dtp__ampm" v-if="props.useAmpm">
+        <button 
+          name="set-am" 
+          :class='["dtp__ampm-button", "dtp__ampm-am", { "dtp__ampm-active": isAm }]' 
+          @click="isAm = true" 
+          aria-label="Set AM"
+          >AM</button>
+        <button 
+          name="set-pm" 
+          :class='["dtp__ampm-button", "dtp__ampm-pm", { "dtp__ampm-active": !isAm }]' 
+          @click="isAm = false" 
+          aria-label="Set PM"
+          >PM</button>
+      </div>
     </div>
-    
-    <div class="dtp__ampm" v-if="props.useAmpm">
-      <button 
-        name="set-am" 
-        :class='["dtp__ampm-button", "dtp__ampm-am", { "dtp__ampm-active": isAm }]' 
-        @click="isAm = true" 
-        aria-label="Set AM"
-        >AM</button>
-      <button 
-        name="set-pm" 
-        :class='["dtp__ampm-button", "dtp__ampm-pm", { "dtp__ampm-active": !isAm }]' 
-        @click="isAm = false" 
-        aria-label="Set PM"
-        >PM</button>
-    </div>
-  </div>
     
     <div class="dtp__bottom-content">
       <slot></slot>
@@ -292,7 +338,9 @@ watch(date, () => {
 
 .dtp__grid-container {
   display: grid;
+  grid-auto-flow: column;
   grid-template-columns: repeat(11, 0fr);
+  grid-template-rows: auto auto auto;
   justify-items: center;
   justify-content: center;
   font-family: 'Noto Sans Mono', monospace;
