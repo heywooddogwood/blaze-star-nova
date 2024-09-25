@@ -35,8 +35,13 @@
           
           <div id="controls" class="control-icon-wrapper">
           <div id="controls-top-row">
-            <font-awesome-icon size="lg" :color="accentColor" :icon="showControls ? `chevron-down` : `gear`"
-              @click="showControls = !showControls" @keyup.enter="showControls = !showControls" tabindex="0" />
+            <font-awesome-icon
+              size="lg"
+              class="tab-focusable"
+              :icon="showControls ? `chevron-down` : `gear`"
+              @click="showControls = !showControls" 
+              @keyup.enter="showControls = !showControls"
+              tabindex="0" />
           </div>
           
           <div v-if="showControls" id="control-checkboxes">
@@ -966,6 +971,14 @@ p {
   gap: 1rem;
 }
 
+.tab-focusable {
+  color: var(--accent-color);
+
+  &:focus {
+    color: white;
+  }
+}
+
 #controls {
   background: black;
   padding-block: 0.5em;
@@ -1009,7 +1022,8 @@ p {
     }
 
     .v-selection-control--focused .v-selection-control__input {
-      border: solid #99c8ff 2px;
+      border: solid #99c8ff 3px;
+      color: white;
     }
 
     .v-btn {
