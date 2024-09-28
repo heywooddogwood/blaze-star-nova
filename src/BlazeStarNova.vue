@@ -35,8 +35,13 @@
           
           <div id="controls" class="control-icon-wrapper">
           <div id="controls-top-row">
-            <font-awesome-icon size="lg" :color="accentColor" :icon="showControls ? `chevron-down` : `gear`"
-              @click="showControls = !showControls" @keyup.enter="showControls = !showControls" tabindex="0" />
+            <font-awesome-icon
+              size="lg"
+              class="tab-focusable"
+              :icon="showControls ? `chevron-down` : `gear`"
+              @click="showControls = !showControls" 
+              @keyup.enter="showControls = !showControls"
+              tabindex="0" />
           </div>
           
           <div v-if="showControls" id="control-checkboxes">
@@ -125,61 +130,61 @@
       <!-- Date Picker -->
        <div id="empty-space">
        </div>
-       <div id="playback-controls" :class="{'justify-md-end': isTourPlaying, 'px-4': isTourPlaying, 'pc-widescreen': aspectRatio > 1.5}">
-            
-          <icon-button
-            @activate="() => playPauseTour()"
-            :fa-icon="isTourPlaying ? 'stop' : 'play'"
-            :color="buttonColor"
-            :tooltip-text="isTourPlaying ? 'Stop tour' : 'Play tour'"
-            tooltip-location="top">
-              <template #button>
-                <span class="jl_icon_button_text">{{ isTourPlaying ? 'Leave tour and return to main view' : 'Show me how to find the nova'}}</span>
-              </template>
-          </icon-button>
-          <icon-button
-            v-if="!isTourPlaying && !(aspectRatio > 1.5 && height < 330)"
-            @activate="() => {
-              toggleAndGoToNova();  
-            }"
-            :color="buttonColor"
-            :tooltip-text="store.backgroundImageset?.get_name() == TYCHO_ISET_NAME ? 'Show nova' : 'Hide nova'"
-            tooltip-location="top"
-          >
+       <div id="playback-controls" :class="{'justify-md-end': isTourPlaying, 'px-4': isTourPlaying, 'pc-widescreen': aspectRatio > 1.5}">    
+        <icon-button
+          @activate="() => playPauseTour()"
+          :fa-icon="isTourPlaying ? 'stop' : 'play'"
+          :color="buttonColor"
+          :tooltip-text="isTourPlaying ? 'Stop tour' : 'Play tour'"
+          tooltip-location="top"
+        >
+          <template #button>
+            <span class="jl_icon_button_text">{{ isTourPlaying ? 'Leave tour and return to main view' : 'Show me how to find the nova'}}</span>
+          </template>
+        </icon-button>
+        <icon-button
+          v-if="!isTourPlaying && !(aspectRatio > 1.5 && height < 330)"
+          @activate="() => {
+            toggleAndGoToNova();  
+          }"
+          :color="buttonColor"
+          :tooltip-text="store.backgroundImageset?.get_name() == TYCHO_ISET_NAME ? 'Show nova' : 'Hide nova'"
+          tooltip-location="top"
+        >
+          <template #button>
+            <span class="jl_icon_button_text">{{
+              store.backgroundImageset?.get_name() == TYCHO_ISET_NAME ?
+              'Show me what the nova will look like' :
+              'Show me what T CrB usually looks like'
+              }}</span>
+          </template>
+        </icon-button>
+        <!-- icon button to go to TCrB -->
+        <icon-button
+          v-if="!isTourPlaying"
+          @activate="() => goToTCrB()"
+          fa-icon="star"
+          :color="buttonColor"
+          tooltip-text="Center on T CrB"
+          tooltip-location="top">
             <template #button>
-              <span class="jl_icon_button_text">{{
-                store.backgroundImageset?.get_name() == TYCHO_ISET_NAME ?
-                'Show me what the nova will look like' :
-                'Show me what T CrB usually looks like'
-                }}</span>
+              <span class="jl_icon_button_text"><v-icon>mdi-flare</v-icon><span> Go to T CrB</span></span>
             </template>
-          </icon-button>
-          <!-- icon button to go to TCrB -->
-          <icon-button
-            v-if="!isTourPlaying"
-            @activate="() => goToTCrB()"
-            fa-icon="star"
-            :color="buttonColor"
-            tooltip-text="Center on T CrB"
-            tooltip-location="top">
-              <template #button>
-                <span class="jl_icon_button_text"><v-icon>mdi-flare</v-icon><span> Go to T CrB</span></span>
-              </template>
-          </icon-button>
+        </icon-button>
 
 
-          <!-- reset time to now button -->
-          <button 
-            class="icon-wrapper jl_icon-button jl_debug"
-            @click="selectedDate = new Date()"
-            :style="{color: buttonColor}"
-          ><font-awesome-icon icon="clock"/>&nbsp;Set time to Now</button>
-          <!-- reset to 9pm button -->
-          <button
-            class="icon-wrapper jl_icon-button jl_debug"
-            @click="selectedDate = todayAt9pm()"
-            :style="{color: buttonColor}"
-          ><font-awesome-icon icon="clock"/>&nbsp;Set time to 9pm</button>
+        <!-- reset time to now button -->
+        <button 
+          class="icon-wrapper jl_icon-button jl_debug"
+          @click="selectedDate = new Date()"
+          :style="{color: buttonColor}"
+        ><font-awesome-icon icon="clock"/>&nbsp;Set time to Now</button>
+        <!-- reset to 9pm button -->
+        <button
+          class="icon-wrapper jl_icon-button jl_debug"
+          @click="selectedDate = todayAt9pm()"
+          :style="{color: buttonColor}"
+        ><font-awesome-icon icon="clock"/>&nbsp;Set time to 9pm</button>
        </div>
        
        
@@ -189,19 +194,6 @@
       <!-- This block contains the elements (e.g. the project icons) displayed along the bottom of the screen -->
       
       <div id="bottom-content">
-        <credit-logos v-if="!smAndDown && !isTourPlaying" style="margin:1em;" logo-size="25px"/>
-        
-        <div style="flex-grow:1;"></div>
-        
-        <icon-button 
-          v-if="!isTourPlaying"
-          :fa-icon="timePlaying ? 'pause' : 'play'"
-          :color="buttonColor" 
-          :tooltip-text="timePlaying ? 'Pause time' : 'Let time move forward'"
-          tooltip-location="start" 
-          @activate="()=>{playbackControl.togglePlay()}" 
-          style="align-self: center;"
-        />
         <div id="date-picker">
             <v-overlay 
             activator="parent"
@@ -235,8 +227,17 @@
               </v-card>
             </v-overlay>
         </div>
-        
-        
+        <icon-button 
+          v-if="!isTourPlaying"
+          :fa-icon="timePlaying ? 'pause' : 'play'"
+          :color="buttonColor" 
+          :tooltip-text="timePlaying ? 'Pause time' : 'Let time move forward'"
+          tooltip-location="start" 
+          @activate="()=>{playbackControl.togglePlay()}" 
+          style="align-self: center;"
+        />
+        <div style="flex-grow:1;"></div>
+        <credit-logos v-if="!smAndDown && !isTourPlaying" style="margin:1em;" logo-size="25px"/>
       </div>
     
 
@@ -970,6 +971,14 @@ p {
   gap: 1rem;
 }
 
+.tab-focusable {
+  color: var(--accent-color);
+
+  &:focus {
+    color: white;
+  }
+}
+
 #controls {
   background: black;
   padding-block: 0.5em;
@@ -1010,6 +1019,11 @@ p {
     .v-checkbox .v-selection-control__wrapper {
       width: calc(1.2 * var(--default-line-height));
       height: calc(1.2 * var(--default-line-height));
+    }
+
+    .v-selection-control--focused .v-selection-control__input {
+      border: solid #99c8ff 3px;
+      color: white;
     }
 
     .v-btn {
