@@ -33,32 +33,8 @@
           </icon-button> -->
           
           
-          <div id="controls" class="control-icon-wrapper">
-          <div id="controls-top-row">
-            <font-awesome-icon
-              size="lg"
-              class="tab-focusable"
-              :icon="showControls ? `chevron-down` : `gear`"
-              @click="showControls = !showControls" 
-              @keyup.enter="showControls = !showControls"
-              tabindex="0" />
-          </div>
-          
-          <div v-if="showControls" id="control-checkboxes">
-            <v-checkbox :color="accentColor" v-model="showAltAzGrid" @keyup.enter="showAltAzGrid = !showAltAzGrid"
-              label="Sky Grid" hide-details />
-            <v-checkbox :color="accentColor" v-model="showHorizon" @keyup.enter="showHorizon = !showHorizon"
-              label="Horizon" hide-details />
-            <v-checkbox :color="accentColor" v-model="showConstellations" @keyup.enter="showConstellations = !showConstellations"
-              label="Constellations" hide-details />
-            <v-checkbox :color="accentColor" v-model="showBlazeOverlay" @keyup.enter="showBlazeOverlay = !showBlazeOverlay"
-              label="Blaze Star Location" hide-details />
-            <v-checkbox :color="accentColor" v-model="showAlphaOverlay" @keyup.enter="showAlphaOverlay = !showAlphaOverlay"
-              label="Alphecca Location" hide-details />
-          </div>
         </div>
-          
-        </div>
+
         <div id="center-buttons">
           <icon-button
             v-model="showLocationSelector"
@@ -66,40 +42,37 @@
             :color="buttonColor"
             tooltip-text="Select Location"
             tooltip-location="start"
-            ></icon-button>
+          ></icon-button>
 
-              <v-dialog
-                v-model="showLocationSelector"
-                max-width="fit-content"
-                transition="slide-y-transition"
-                id="eclipse-prediction-sheet"
-              >
-                <v-card>
-                    <font-awesome-icon
-                      style="position: absolute; right: 12px; top: 12px; cursor: pointer; padding: 1em; margin: -1em; z-index: 1000;"
-                      icon="square-xmark"
-                      size="xl"
-                      @click="showLocationSelector = false"
-                      @keyup.enter="showLocationSelector = false"
-                      tabindex="0"
-                      color="black"
-                    ></font-awesome-icon>
-                    <location-selector
-                      v-model="selectedLocation"
-                      />
-                    <geolocation-button
-                      :debug="false"
-                      size="30px"
-                      density="default"
-                      elevation="5"
-                      color="black"
-                      @location="selectedLocation = {longitudeDeg: $event.longitude, latitudeDeg: $event.latitude}"
-                    />
-                </v-card>
-              </v-dialog>
-                
-
-              
+          <v-dialog
+            v-model="showLocationSelector"
+            max-width="fit-content"
+            transition="slide-y-transition"
+            id="eclipse-prediction-sheet"
+          >
+            <v-card>
+              <font-awesome-icon
+                style="position: absolute; right: 12px; top: 12px; cursor: pointer; padding: 1em; margin: -1em; z-index: 1000;"
+                icon="square-xmark"
+                size="xl"
+                @click="showLocationSelector = false"
+                @keyup.enter="showLocationSelector = false"
+                tabindex="0"
+                color="black"
+              ></font-awesome-icon>
+              <location-selector
+                v-model="selectedLocation"
+                />
+              <geolocation-button
+                :debug="false"
+                size="30px"
+                density="default"
+                elevation="5"
+                color="black"
+                @location="selectedLocation = {longitudeDeg: $event.longitude, latitudeDeg: $event.latitude}"
+              />
+            </v-card>
+          </v-dialog>
         </div>
         <div id="right-buttons">
           <v-chip
@@ -124,6 +97,30 @@
             class="icon-wrapper jl_icon-button jl_debug"
             @click="() => WWTControl.singleton.renderOneFrame()"
             >Render one frame</button>
+          <div id="controls" class="control-icon-wrapper">
+            <div id="controls-top-row">
+              <font-awesome-icon
+                size="lg"
+                class="tab-focusable"
+                :icon="showControls ? `chevron-down` : `gear`"
+                @click="showControls = !showControls" 
+                @keyup.enter="showControls = !showControls"
+                tabindex="0" />
+            </div>
+          
+            <div v-if="showControls" id="control-checkboxes">
+              <v-checkbox :color="accentColor" v-model="showAltAzGrid" @keyup.enter="showAltAzGrid = !showAltAzGrid"
+                label="Sky Grid" hide-details />
+              <v-checkbox :color="accentColor" v-model="showHorizon" @keyup.enter="showHorizon = !showHorizon"
+                label="Horizon" hide-details />
+              <v-checkbox :color="accentColor" v-model="showConstellations" @keyup.enter="showConstellations = !showConstellations"
+                label="Constellations" hide-details />
+              <v-checkbox :color="accentColor" v-model="showBlazeOverlay" @keyup.enter="showBlazeOverlay = !showBlazeOverlay"
+                label="Blaze Star Location" hide-details />
+              <v-checkbox :color="accentColor" v-model="showAlphaOverlay" @keyup.enter="showAlphaOverlay = !showAlphaOverlay"
+                label="Alphecca Location" hide-details />
+            </div>
+          </div>
         </div>
       </div>
 
@@ -196,12 +193,12 @@
       <div id="bottom-content">
         <div id="date-picker">
             <v-overlay 
-            activator="parent"
-            location-strategy="connected"
-            location="top end"
-            origin="bottom end"
-            :scrim="false"
-            :style="cssVars"
+              activator="parent"
+              location-strategy="connected"
+              location="top end"
+              origin="bottom end"
+              :scrim="false"
+              :style="cssVars"
             >
             <template #activator="{props}">
               <!-- any props added are passed directly to v-card -->
