@@ -1,7 +1,7 @@
 <template>
   <v-overlay :model-value="showSplashScreen" absolute opacity="0.6" :style="props.cssVars" id="splash-overlay">
     <div id="splash-screen" v-click-outside="closeSplashScreen" :style="props.cssVars">
-      <div id="close-splash-button" @click="closeSplashScreen">&times;</div>
+      <span id="close-splash-button" @click="closeSplashScreen">&times;</span>
       <div id="splash-screen-text">
         <div class="highlight">Blaze Star Nova</div>
         <div class="burst">Learn where in the sky to watch for a "new" star!</div>
@@ -13,9 +13,9 @@
         <div id="splash-screen-logos">
           <credit-logos logo-size="5vmin" />
         </div>
-        <div id="image-credit">
-          Image credit: NASA / Goddard Space Flight Center
-        </div>
+      </div>
+      <div id="image-credit">
+        Image credit: NASA / Goddard Space Flight Center
       </div>
     </div>
   </v-overlay>
@@ -93,7 +93,6 @@ function closeSplashScreen() {
   }
 
   div:not(#close-splash-button, #splash-screen-acknowledgements) {
-    margin-inline: 5%;
     text-align: center;
   }
   
@@ -113,7 +112,7 @@ function closeSplashScreen() {
   .burst {
     background-color: rgba(255, 255, 255, 0.4);
     border-radius: 15px;
-    margin: 1rem;
+    margin: 5%;
     padding: 1rem;
     line-height: 1.2;
     font-size: min(0.9em, 5vw)
@@ -145,6 +144,7 @@ function closeSplashScreen() {
     top: 20px;
     right: 20px;
     text-align: end;
+    line-height: 1;
     color: var(--accent-color);
     font-size: min(8vw, 5vh);
 
@@ -162,10 +162,20 @@ function closeSplashScreen() {
     }
   }
 
+#splash-logos {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 1rem;
+
+  @media (max-width: 700px) {
+    display: none;
+  }
+}
+
   #image-credit {
     position: absolute;
     bottom: 0.5rem;
-    right: -1rem;
+    right: 1rem;
     font-size: calc(0.6 * var(--default-font-size));
     font-weight: 400;
     color: #DDDDDD;
