@@ -25,40 +25,19 @@
 
       <div id="top-content">
         <div id="left-buttons" v-if="!isTourPlaying">
-          <icon-button v-model="showTextSheet" fa-icon="book-open" :color="buttonColor"
-            :tooltip-text="showTextSheet ? 'Hide Info' : 'Learn More'" tooltip-location="start">
+          <icon-button v-model="showNovaSheet" fa-icon="book-open" :color="buttonColor"
+            :tooltip-text="showNovaSheet ? 'Hide Info' : 'Learn More'" tooltip-location="start">
+          </icon-button>
+          <icon-button v-model="showUseSheet" fa-icon="info" :color="buttonColor"
+            :tooltip-text="showUseSheet ? 'Hide Info' : 'Learn More'" tooltip-location="start">
           </icon-button>
           <!-- <icon-button v-model="showVideoSheet" fa-icon="video" :color="buttonColor" tooltip-text="Watch video"
             tooltip-location="start">
           </icon-button> -->
           
           
-          <div id="controls" class="control-icon-wrapper">
-          <div id="controls-top-row">
-            <font-awesome-icon
-              size="lg"
-              class="tab-focusable"
-              :icon="showControls ? `chevron-down` : `gear`"
-              @click="showControls = !showControls" 
-              @keyup.enter="showControls = !showControls"
-              tabindex="0" />
-          </div>
-          
-          <div v-if="showControls" id="control-checkboxes">
-            <v-checkbox :color="accentColor" v-model="showAltAzGrid" @keyup.enter="showAltAzGrid = !showAltAzGrid"
-              label="Sky Grid" hide-details />
-            <v-checkbox :color="accentColor" v-model="showHorizon" @keyup.enter="showHorizon = !showHorizon"
-              label="Horizon" hide-details />
-            <v-checkbox :color="accentColor" v-model="showConstellations" @keyup.enter="showConstellations = !showConstellations"
-              label="Constellations" hide-details />
-            <v-checkbox :color="accentColor" v-model="showBlazeOverlay" @keyup.enter="showBlazeOverlay = !showBlazeOverlay"
-              label="Blaze Star Location" hide-details />
-            <v-checkbox :color="accentColor" v-model="showAlphaOverlay" @keyup.enter="showAlphaOverlay = !showAlphaOverlay"
-              label="Alphecca Location" hide-details />
-          </div>
         </div>
-          
-        </div>
+
         <div id="center-buttons">
           <icon-button
             v-model="showLocationSelector"
@@ -66,40 +45,37 @@
             :color="buttonColor"
             tooltip-text="Select Location"
             tooltip-location="start"
-            ></icon-button>
+          ></icon-button>
 
-              <v-dialog
-                v-model="showLocationSelector"
-                max-width="fit-content"
-                transition="slide-y-transition"
-                id="eclipse-prediction-sheet"
-              >
-                <v-card>
-                    <font-awesome-icon
-                      style="position: absolute; right: 12px; top: 12px; cursor: pointer; padding: 1em; margin: -1em; z-index: 1000;"
-                      icon="square-xmark"
-                      size="xl"
-                      @click="showLocationSelector = false"
-                      @keyup.enter="showLocationSelector = false"
-                      tabindex="0"
-                      color="black"
-                    ></font-awesome-icon>
-                    <location-selector
-                      v-model="selectedLocation"
-                      />
-                    <geolocation-button
-                      :debug="false"
-                      size="30px"
-                      density="default"
-                      elevation="5"
-                      color="black"
-                      @location="selectedLocation = {longitudeDeg: $event.longitude, latitudeDeg: $event.latitude}"
-                    />
-                </v-card>
-              </v-dialog>
-                
-
-              
+          <v-dialog
+            v-model="showLocationSelector"
+            max-width="fit-content"
+            transition="slide-y-transition"
+            id="eclipse-prediction-sheet"
+          >
+            <v-card>
+              <font-awesome-icon
+                style="position: absolute; right: 12px; top: 12px; cursor: pointer; padding: 1em; margin: -1em; z-index: 1000;"
+                icon="square-xmark"
+                size="xl"
+                @click="showLocationSelector = false"
+                @keyup.enter="showLocationSelector = false"
+                tabindex="0"
+                color="black"
+              ></font-awesome-icon>
+              <location-selector
+                v-model="selectedLocation"
+                />
+              <geolocation-button
+                :debug="false"
+                size="30px"
+                density="default"
+                elevation="5"
+                color="black"
+                @location="selectedLocation = {longitudeDeg: $event.longitude, latitudeDeg: $event.latitude}"
+              />
+            </v-card>
+          </v-dialog>
         </div>
         <div id="right-buttons">
           <v-chip
@@ -124,6 +100,30 @@
             class="icon-wrapper jl_icon-button jl_debug"
             @click="() => WWTControl.singleton.renderOneFrame()"
             >Render one frame</button>
+          <div id="controls" class="control-icon-wrapper">
+            <div id="controls-top-row">
+              <font-awesome-icon
+                size="lg"
+                class="tab-focusable"
+                :icon="showControls ? `chevron-down` : `gear`"
+                @click="showControls = !showControls" 
+                @keyup.enter="showControls = !showControls"
+                tabindex="0" />
+            </div>
+          
+            <div v-if="showControls" id="control-checkboxes">
+              <v-checkbox :color="accentColor" v-model="showAltAzGrid" @keyup.enter="showAltAzGrid = !showAltAzGrid"
+                label="Sky Grid" hide-details />
+              <v-checkbox :color="accentColor" v-model="showHorizon" @keyup.enter="showHorizon = !showHorizon"
+                label="Horizon" hide-details />
+              <v-checkbox :color="accentColor" v-model="showConstellations" @keyup.enter="showConstellations = !showConstellations"
+                label="Constellations" hide-details />
+              <v-checkbox :color="accentColor" v-model="showBlazeOverlay" @keyup.enter="showBlazeOverlay = !showBlazeOverlay"
+                label="Blaze Star Location" hide-details />
+              <v-checkbox :color="accentColor" v-model="showAlphaOverlay" @keyup.enter="showAlphaOverlay = !showAlphaOverlay"
+                label="Alphecca Location" hide-details />
+            </div>
+          </div>
         </div>
       </div>
 
@@ -196,12 +196,12 @@
       <div id="bottom-content">
         <div id="date-picker">
             <v-overlay 
-            activator="parent"
-            location-strategy="connected"
-            location="top end"
-            origin="bottom end"
-            :scrim="false"
-            :style="cssVars"
+              activator="parent"
+              location-strategy="connected"
+              location="top end"
+              origin="bottom end"
+              :scrim="false"
+              :style="cssVars"
             >
             <template #activator="{props}">
               <!-- any props added are passed directly to v-card -->
@@ -253,13 +253,24 @@
         </div>
       </v-dialog>
 
-
-
-
       <!-- This dialog contains the informational content that is displayed when the book icon is clicked -->
-      <bottom-sheet
+      <bottom-nova-sheet
         :cssVars="cssVars"
-        v-model="showTextSheet"
+        v-model="showNovaSheet"
+        :accent-color="accentColor"
+        :touchscreen="touchscreen"
+        :show-blaze-overlay="showBlazeOverlay"
+        :show-alpha-overlay="showAlphaOverlay"
+        @toggle-blaze="() => store.gotoRADecZoom({ raRad: crbPlace.get_RA() * 15 * D2R, decRad: crbPlace.get_dec() * D2R, zoomDeg: 180, instant: false })"
+        @toggle-alpha="() => {
+          toggleAlpha();
+        }"
+       />
+
+      <!-- This dialog contains the informational content that is displayed when the info icon is clicked -->
+      <bottom-use-sheet
+        :cssVars="cssVars"
+        v-model="showUseSheet"
         :accent-color="accentColor"
         :touchscreen="touchscreen"
         :show-blaze-overlay="showBlazeOverlay"
@@ -292,7 +303,7 @@ import { resetAltAzGridText, makeAltAzGridText, setupConstellationFigures, rende
 import { usePlaybackControl } from "./wwt_playback_control";
 import { useTimezone } from "./timezones";
 
-type SheetType = "text" | "video";
+type SheetType = "nova-text" | "use-text" | "video";
 type CameraParams = Omit<GotoRADecZoomParams, "instant">;
 export interface MainComponentProps {
   wwtNamespace?: string;
@@ -549,7 +560,7 @@ const cssVars = computed(() => {
   // get the text-bottom-sheet id height and subtract it from 100vh
   return {
     "--accent-color": accentColor.value,
-    "--app-content-height": showTextSheet.value ? "66%" : "100%",
+    "--app-content-height": (showNovaSheet.value | showUseSheet.value) ? "66%" : "100%",
   };
 });
 
@@ -560,12 +571,21 @@ const cssVars = computed(() => {
   computed wrappers around modifying/querying that which can be used as
   dialog v-model values
 */
-const showTextSheet = computed({
+const showNovaSheet = computed({
   get() {
-    return sheet.value === "text";
+    return sheet.value === "nova-text";
   },
   set(_value: boolean) {
-    selectSheet("text");
+    selectSheet("nova-text");
+  }
+});
+
+const showUseSheet = computed({
+  get() {
+    return sheet.value === "use-text";
+  },
+  set(_value: boolean) {
+    selectSheet("use-text");
   }
 });
 

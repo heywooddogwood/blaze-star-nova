@@ -9,6 +9,9 @@ import vuetify from "../plugins/vuetify";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 import BottomSheet from "./BottomSheet.vue";
+import BottomNovaSheet from "./BottomNovaSheet.vue";
+import BottomUseSheet from "./BottomUseSheet.vue";
+
 import SplashScreen from "./SplashScreen.vue";
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
@@ -24,6 +27,7 @@ import {
   faChevronDown,
   faClock,
   faGear,
+  faInfo,
   faLocation,
   faLocationDot,
   faPlay,
@@ -38,6 +42,7 @@ library.add(faBookOpen);
 library.add(faChevronDown);
 library.add(faClock);
 library.add(faGear);
+library.add(faInfo);
 library.add(faLocation);
 library.add(faLocationDot);
 library.add(faPause);
@@ -79,6 +84,8 @@ createApp(BlazeStarNova, {
   .component("WorldWideTelescope", WWTComponent)
   .component('font-awesome-icon', FontAwesomeIcon)
   .component('bottom-sheet', BottomSheet)
+  .component('bottom-nova-sheet', BottomNovaSheet)
+  .component('bottom-use-sheet', BottomUseSheet)
   .component('icon-button', IconButton)
   .component('funding-acknowledgement', FundingAcknowledgement)
   .component('credit-logos', CreditLogos)
