@@ -648,23 +648,23 @@ function adjustWWTSize(tourPlaying: boolean) {
   }
 }
 
-function logWWTState() {
-  const loc = getWWTLocation();
-  const locDeg = {
-    latitudeDeg: loc.latitudeRad * 180 / Math.PI,
-    longitudeDeg: loc.longitudeRad * 180 / Math.PI,
-  };
-  console.log(getWWTLocation());
-  console.table({
-    time: store.currentTime,
-    location: locDeg,
-    selectedLocation: selectedLocation.value,
-    showHorizon: showHorizon.value,
-    showAltAzGrid: showAltAzGrid.value,
-    showConstellations: showConstellations.value,
-    crbBelowHorizon: crbBelowHorizon.value,
-  });
-}
+// function logWWTState() {
+//   const loc = getWWTLocation();
+//   const locDeg = {
+//     latitudeDeg: loc.latitudeRad * 180 / Math.PI,
+//     longitudeDeg: loc.longitudeRad * 180 / Math.PI,
+//   };
+//   console.log(getWWTLocation());
+//   console.table({
+//     time: store.currentTime,
+//     location: locDeg,
+//     selectedLocation: selectedLocation.value,
+//     showHorizon: showHorizon.value,
+//     showAltAzGrid: showAltAzGrid.value,
+//     showConstellations: showConstellations.value,
+//     crbBelowHorizon: crbBelowHorizon.value,
+//   });
+// }
 
 
 function set9pm() {
