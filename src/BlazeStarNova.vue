@@ -40,6 +40,7 @@
 
         <div id="center-buttons">
           <icon-button
+            v-if="!isTourPlaying"
             v-model="showLocationSelector"
             fa-icon="location-dot"
             :color="buttonColor"
@@ -77,13 +78,7 @@
             </v-card>
           </v-dialog>
         </div>
-        <div id="right-buttons">
-          <v-chip
-            v-if="crbBelowHorizon && !isTourPlaying"
-            class="chip-text"
-          >
-            Corona Borealis is Set
-          </v-chip>
+        <div id="right-buttons" v-if="!isTourPlaying">
           <button 
             class="icon-wrapper jl_icon-button jl_debug" 
             @click="() => updateHorizonAndSky()"
@@ -124,6 +119,12 @@
                 label="Alphecca Location" hide-details />
             </div>
           </div>
+          <v-chip
+            v-if="crbBelowHorizon"
+            class="chip-text"
+          >
+            Corona Borealis is Set
+          </v-chip>
         </div>
       </div>
 
