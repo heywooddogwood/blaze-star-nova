@@ -77,7 +77,7 @@
                 <v-card>
                     <font-awesome-icon
                       style="position: absolute; right: 12px; top: 12px; cursor: pointer; padding: 1em; margin: -1em; z-index: 1000;"
-                      icon="square-xmark"
+                      icon="xmark"
                       size="xl"
                       @click="showLocationSelector = false"
                       @keyup.enter="showLocationSelector = false"
@@ -108,22 +108,6 @@
           >
             Corona Borealis is Set
           </v-chip>
-          <button 
-            class="icon-wrapper jl_icon-button jl_debug" 
-            @click="() => updateHorizonAndSky()"
-            >Update Horizon and Sky</button>
-          <button
-            class="icon-wrapper jl_icon-button jl_debug"
-            @click="() => updateCrbBelowHorizon()"
-            >Update CRB Below Horizon</button>
-          <button
-            class="icon-wrapper jl_icon-button jl_debug"
-            @click="() => logWWTState()"
-            >Log WWT State</button>
-          <button
-            class="icon-wrapper jl_icon-button jl_debug"
-            @click="() => WWTControl.singleton.renderOneFrame()"
-            >Render one frame</button>
         </div>
       </div>
 
@@ -210,7 +194,6 @@
                 class="td__card"
                 width="fit-content"
                 rounded="lg"
-                elevation="5"
                 tabindex="0"
                 @keyup.enter="props.onClick"
                 >
@@ -979,6 +962,14 @@ p {
   }
 }
 
+:focus-visible,
+button:focus-visible,
+.focus-visible {
+  outline: 9px double black;
+  box-shadow: 0 0 0 6px white !important;
+  border-radius: .125rem;
+}
+
 #controls {
   background: black;
   padding-block: 0.5em;
@@ -1022,8 +1013,8 @@ p {
     }
 
     .v-selection-control--focused .v-selection-control__input {
-      border: solid #99c8ff 3px;
-      color: white;
+      outline: 9px double black;
+      box-shadow: 0 0 0 6px white !important;
     }
 
     .v-btn {
