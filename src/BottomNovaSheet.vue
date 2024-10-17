@@ -64,7 +64,7 @@
 
 
 <script setup lang="ts">
-import { defineProps, defineEmits, withDefaults, defineModel, watch, ref } from 'vue';
+import { defineProps, defineEmits, withDefaults, defineModel, watch } from 'vue';
 import { engineStore } from "@wwtelescope/engine-pinia";
 
 export interface Props {
@@ -88,9 +88,7 @@ const props = withDefaults(defineProps<Props>(),{
 
 const emits = defineEmits(['close', 'toggle-blaze', 'toggle-alpha']);
 
-const { cssVars, accentColor, touchscreen } = props;
-
-const tab = ref(0);
+const { cssVars } = props;
 
 const showNovaSheet = defineModel({default: true});
 

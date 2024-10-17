@@ -67,8 +67,7 @@
 
 
 <script setup lang="ts">
-import { defineProps, defineEmits, withDefaults, defineModel, watch, ref } from 'vue';
-import { engineStore } from "@wwtelescope/engine-pinia";
+import { defineProps, defineEmits, withDefaults, defineModel, watch } from 'vue';
 
 export interface Props {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -91,17 +90,9 @@ const props = withDefaults(defineProps<Props>(),{
 
 const emits = defineEmits(['close', 'toggle-blaze', 'toggle-alpha']);
 
-const { cssVars, accentColor, touchscreen } = props;
-
-const tab = ref(0);
+const { cssVars, touchscreen } = props;
 
 const showUseSheet = defineModel({default: true});
-
-const store = engineStore();
-
-function playTour() {
-  store.loadTour({ url: `${window.location.origin}/FindingCoronaBorealis.WTT`, play: true });
-}
 
 watch(() => showUseSheet, (newVal) => {
   if (!newVal) {
