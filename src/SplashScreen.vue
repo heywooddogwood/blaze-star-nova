@@ -15,10 +15,10 @@
       </div>
       <div id="splash-screen-acknowledgements" class="splash-screen-small">
         <div id="links">
-          This Data Story is brought to you by <a href="https://www.cosmicds.cfa.harvard.edu/" target="_blank" rel="noopener noreferrer">Cosmic Data Stories</a> and <a href="https://www.worldwidetelescope.org/home/" target="_blank" rel="noopener noreferrer">WorldWide Telescope</a>.
+          This Data Story is brought to you by <a href="https://www.cosmicds.cfa.harvard.edu/" target="_blank" rel="noopener noreferrer" class="no-wrap">Cosmic Data Stories</a> and <a href="https://www.worldwidetelescope.org/home/" target="_blank" rel="noopener noreferrer" class="no-wrap">WorldWide Telescope</a>.
         </div>
         <div id="splash-screen-logos">
-          <credit-logos logo-size="5vmin" />
+          <credit-logos logo-size="4vmax" />
         </div>
         <div id="image-credit">
           Image credit: NASA / Goddard Space Flight Center
@@ -176,6 +176,10 @@ function closeSplashScreen() {
     font-size: calc(0.6 * var(--default-font-size));
     font-weight: 400;
     color: #DDDDDD;
+  }
+
+  .no-wrap {
+    white-space: nowrap;
   }
 }
 
