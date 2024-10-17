@@ -962,6 +962,7 @@ p {
   }
 }
 
+// From Sara Soueidan (https://www.sarasoueidan.com/blog/focus-indicators/) & Erik Kroes (https://www.erikkroes.nl/blog/the-universal-focus-state/)
 :focus-visible,
 button:focus-visible,
 .focus-visible {
