@@ -1,7 +1,14 @@
 <template>
   <v-overlay :model-value="showSplashScreen" absolute opacity="0.6" :style="props.cssVars" id="splash-overlay">
     <div id="splash-screen" v-click-outside="closeSplashScreen" :style="props.cssVars">
-      <div id="close-splash-button" @click="closeSplashScreen">&times;</div>
+      <font-awesome-icon
+        id="close-splash-button" 
+        class="tab-focusable"
+        icon="xmark"
+        @click="closeSplashScreen" 
+        @keyup.enter="closeSplashScreen"
+        tabindex="0" 
+      />
       <div id="splash-screen-text">
         <div class="highlight">Blaze Star Nova</div>
         <div class="burst">Learn where in the sky to watch for a "new" star!</div>
@@ -146,7 +153,7 @@ function closeSplashScreen() {
     right: 20px;
     text-align: end;
     color: var(--accent-color);
-    font-size: min(8vw, 5vh);
+    font-size: min(5vw, 4vh);
 
     &:hover {
       cursor: pointer;
