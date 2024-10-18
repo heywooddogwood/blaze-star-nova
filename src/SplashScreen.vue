@@ -2,17 +2,24 @@
   <v-overlay :model-value="showSplashScreen" absolute opacity="0.6" :style="props.cssVars" id="splash-overlay">
     <focus-trap>
       <div id="splash-screen" v-click-outside="closeSplashScreen" :style="props.cssVars">
-        <div id="close-splash-button" @click="closeSplashScreen">&times;</div>
+        <font-awesome-icon
+          id="close-splash-button" 
+          class="tab-focusable"
+          icon="xmark"
+          @click="closeSplashScreen" 
+          @keyup.enter="closeSplashScreen"
+          tabindex="0" 
+        />
         <div id="splash-screen-text">
           <div class="highlight">Blaze Star Nova</div>
           <div class="burst">Learn where in the sky to watch for a "new" star!</div>
         </div>
         <div id="splash-screen-acknowledgements" class="splash-screen-small">
           <div id="links">
-            This Data Story is brought to you by <a href="https://www.cosmicds.cfa.harvard.edu/" target="_blank" rel="noopener noreferrer">Cosmic Data Stories</a> and <a href="https://www.worldwidetelescope.org/home/" target="_blank" rel="noopener noreferrer">WorldWide Telescope</a>.
+            This Data Story is brought to you by <a href="https://www.cosmicds.cfa.harvard.edu/" target="_blank" rel="noopener noreferrer" class="no-wrap">Cosmic Data Stories</a> and <a href="https://www.worldwidetelescope.org/home/" target="_blank" rel="noopener noreferrer" class="no-wrap">WorldWide Telescope</a>.
           </div>
           <div id="splash-screen-logos">
-            <credit-logos logo-size="5vmin" />
+            <credit-logos logo-size="4vmax" />
           </div>
           <div id="image-credit">
             Image credit: NASA / Goddard Space Flight Center
@@ -22,7 +29,6 @@
     </focus-trap>
   </v-overlay>
 </template>
-
 
 <script setup lang="ts">
 export interface Props {
@@ -145,7 +151,7 @@ function closeSplashScreen() {
     right: 20px;
     text-align: end;
     color: var(--accent-color);
-    font-size: min(8vw, 5vh);
+    font-size: min(5vw, 4vh);
 
     &:hover {
       cursor: pointer;
@@ -168,6 +174,10 @@ function closeSplashScreen() {
     font-size: calc(0.6 * var(--default-font-size));
     font-weight: 400;
     color: #DDDDDD;
+  }
+
+  .no-wrap {
+    white-space: nowrap;
   }
 }
 

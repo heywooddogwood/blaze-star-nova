@@ -26,10 +26,10 @@
       <div id="top-content">
         <div id="left-buttons" v-if="!isTourPlaying">
           <icon-button v-model="showNovaSheet" fa-icon="book-open" :color="buttonColor"
-            :tooltip-text="showNovaSheet ? 'Hide Info' : 'Learn More'" tooltip-location="start">
+            :tooltip-text="showNovaSheet ? 'Hide Info' : 'Learn About Novas'" tooltip-location="start">
           </icon-button>
           <icon-button v-model="showUseSheet" fa-icon="info" :color="buttonColor"
-            :tooltip-text="showUseSheet ? 'Hide Info' : 'Learn More'" tooltip-location="start">
+            :tooltip-text="showUseSheet ? 'Hide Info' : 'How to Navigate'" tooltip-location="start">
           </icon-button>
           <!-- <icon-button v-model="showVideoSheet" fa-icon="video" :color="buttonColor" tooltip-text="Watch video"
             tooltip-location="start">
@@ -55,46 +55,30 @@
             id="eclipse-prediction-sheet"
           >
             <v-card>
-              <font-awesome-icon
-                style="position: absolute; right: 12px; top: 12px; cursor: pointer; padding: 1em; margin: -1em; z-index: 1000;"
-                icon="square-xmark"
-                size="xl"
-                @click="showLocationSelector = false"
-                @keyup.enter="showLocationSelector = false"
-                tabindex="0"
-                color="black"
-              ></font-awesome-icon>
-              <location-selector
-                v-model="selectedLocation"
+                <font-awesome-icon
+                  style="position: absolute; right: 12px; top: 12px; cursor: pointer; padding: 1em; margin: -1em; z-index: 1000;"
+                  icon="xmark"
+                  size="xl"
+                  @click="showLocationSelector = false"
+                  @keyup.enter="showLocationSelector = false"
+                  tabindex="0"
+                  color="black"
+                ></font-awesome-icon>
+                <location-selector
+                  v-model="selectedLocation"
+                  />
+                <geolocation-button
+                  :debug="false"
+                  size="30px"
+                  density="default"
+                  elevation="5"
+                  color="black"
+                  @location="selectedLocation = {longitudeDeg: $event.longitude, latitudeDeg: $event.latitude}"
                 />
-              <geolocation-button
-                :debug="false"
-                size="30px"
-                density="default"
-                elevation="5"
-                color="black"
-                @location="selectedLocation = {longitudeDeg: $event.longitude, latitudeDeg: $event.latitude}"
-              />
             </v-card>
           </v-dialog>
         </div>
         <div id="right-buttons" v-if="!isTourPlaying">
-          <button 
-            class="icon-wrapper jl_icon-button jl_debug" 
-            @click="() => updateHorizonAndSky()"
-            >Update Horizon and Sky</button>
-          <button
-            class="icon-wrapper jl_icon-button jl_debug"
-            @click="() => updateCrbBelowHorizon()"
-            >Update CRB Below Horizon</button>
-          <button
-            class="icon-wrapper jl_icon-button jl_debug"
-            @click="() => logWWTState()"
-            >Log WWT State</button>
-          <button
-            class="icon-wrapper jl_icon-button jl_debug"
-            @click="() => WWTControl.singleton.renderOneFrame()"
-            >Render one frame</button>
           <div id="controls" class="control-icon-wrapper">
             <div id="controls-top-row">
               <font-awesome-icon
@@ -211,7 +195,6 @@
                 class="td__card"
                 width="fit-content"
                 rounded="lg"
-                elevation="5"
                 tabindex="0"
                 @keyup.enter="props.onClick"
                 >
@@ -686,23 +669,23 @@ function adjustWWTSize(tourPlaying: boolean) {
   }
 }
 
-function logWWTState() {
-  const loc = getWWTLocation();
-  const locDeg = {
-    latitudeDeg: loc.latitudeRad * 180 / Math.PI,
-    longitudeDeg: loc.longitudeRad * 180 / Math.PI,
-  };
-  console.log(getWWTLocation());
-  console.table({
-    time: store.currentTime,
-    location: locDeg,
-    selectedLocation: selectedLocation.value,
-    showHorizon: showHorizon.value,
-    showAltAzGrid: showAltAzGrid.value,
-    showConstellations: showConstellations.value,
-    crbBelowHorizon: crbBelowHorizon.value,
-  });
-}
+// function logWWTState() {
+//   const loc = getWWTLocation();
+//   const locDeg = {
+//     latitudeDeg: loc.latitudeRad * 180 / Math.PI,
+//     longitudeDeg: loc.longitudeRad * 180 / Math.PI,
+//   };
+//   console.log(getWWTLocation());
+//   console.table({
+//     time: store.currentTime,
+//     location: locDeg,
+//     selectedLocation: selectedLocation.value,
+//     showHorizon: showHorizon.value,
+//     showAltAzGrid: showAltAzGrid.value,
+//     showConstellations: showConstellations.value,
+//     crbBelowHorizon: crbBelowHorizon.value,
+//   });
+// }
 
 
 function set9pm() {
@@ -1000,6 +983,15 @@ p {
   }
 }
 
+// From Sara Soueidan (https://www.sarasoueidan.com/blog/focus-indicators/) & Erik Kroes (https://www.erikkroes.nl/blog/the-universal-focus-state/)
+:focus-visible,
+button:focus-visible,
+.focus-visible {
+  outline: 9px double black;
+  box-shadow: 0 0 0 6px white !important;
+  border-radius: .125rem;
+}
+
 #controls {
   background: black;
   padding-block: 0.5em;
@@ -1043,8 +1035,8 @@ p {
     }
 
     .v-selection-control--focused .v-selection-control__input {
-      border: solid #99c8ff 3px;
-      color: white;
+      outline: 9px double black;
+      box-shadow: 0 0 0 6px white !important;
     }
 
     .v-btn {
