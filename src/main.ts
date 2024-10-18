@@ -32,7 +32,7 @@ import {
   faLocationDot,
   faPlay,
   faPause,
-  faSquareXmark,
+  faXmark,
   faStop,
   faTimes,
   faVideo,
@@ -47,7 +47,7 @@ library.add(faLocation);
 library.add(faLocationDot);
 library.add(faPause);
 library.add(faPlay);
-library.add(faSquareXmark);
+library.add(faXmark);
 library.add(faStop);
 library.add(faTimes);
 library.add(faVideo);
