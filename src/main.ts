@@ -8,6 +8,8 @@ import vuetify from "../plugins/vuetify";
 
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
+import { FocusTrap } from "focus-trap-vue";
+
 import BottomSheet from "./BottomSheet.vue";
 import BottomNovaSheet from "./BottomNovaSheet.vue";
 import BottomUseSheet from "./BottomUseSheet.vue";
@@ -95,6 +97,7 @@ createApp(BlazeStarNova, {
   .component('location-selector', LocationSelector)
   .component('time-display', TimeDisplay)
   .component('date-time-picker', DateTimePicker)
+  .component('focus-trap', FocusTrap)
 
   // Mount
   .mount("#app");

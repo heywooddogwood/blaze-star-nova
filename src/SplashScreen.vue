@@ -1,31 +1,30 @@
 <template>
   <v-overlay :model-value="showSplashScreen" absolute opacity="0.6" :style="props.cssVars" id="splash-overlay">
-    <div id="splash-screen" v-click-outside="closeSplashScreen" :style="props.cssVars">
-      <div id="close-splash-button" @click="closeSplashScreen">&times;</div>
-      <div id="splash-screen-text">
-        <div class="highlight">Blaze Star Nova</div>
-        <div class="burst">Learn where in the sky to watch for a "new" star!</div>
+    <focus-trap>
+      <div id="splash-screen" v-click-outside="closeSplashScreen" :style="props.cssVars">
+        <div id="close-splash-button" @click="closeSplashScreen">&times;</div>
+        <div id="splash-screen-text">
+          <div class="highlight">Blaze Star Nova</div>
+          <div class="burst">Learn where in the sky to watch for a "new" star!</div>
+        </div>
+        <div id="splash-screen-acknowledgements" class="splash-screen-small">
+          <div id="links">
+            This Data Story is brought to you by <a href="https://www.cosmicds.cfa.harvard.edu/" target="_blank" rel="noopener noreferrer">Cosmic Data Stories</a> and <a href="https://www.worldwidetelescope.org/home/" target="_blank" rel="noopener noreferrer">WorldWide Telescope</a>.
+          </div>
+          <div id="splash-screen-logos">
+            <credit-logos logo-size="5vmin" />
+          </div>
+          <div id="image-credit">
+            Image credit: NASA / Goddard Space Flight Center
+          </div>
+        </div>
       </div>
-      <div id="splash-screen-acknowledgements" class="splash-screen-small">
-        <div id="links">
-          This Data Story is brought to you by <a href="https://www.cosmicds.cfa.harvard.edu/" target="_blank" rel="noopener noreferrer">Cosmic Data Stories</a> and <a href="https://www.worldwidetelescope.org/home/" target="_blank" rel="noopener noreferrer">WorldWide Telescope</a>.
-        </div>
-        <div id="splash-screen-logos">
-          <credit-logos logo-size="5vmin" />
-        </div>
-        <div id="image-credit">
-          Image credit: NASA / Goddard Space Flight Center
-        </div>
-      </div>
-    </div>
+    </focus-trap>
   </v-overlay>
 </template>
 
 
 <script setup lang="ts">
-import { defineProps, defineModel, defineEmits, withDefaults } from 'vue';
-console.log('SplashScreen.vue');
-
 export interface Props {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   cssVars?: any;
