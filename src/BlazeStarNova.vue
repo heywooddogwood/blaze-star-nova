@@ -26,10 +26,10 @@
       <div id="top-content">
         <div id="left-buttons" v-if="!isTourPlaying">
           <icon-button v-model="showNovaSheet" fa-icon="book-open" :color="buttonColor"
-            :tooltip-text="showNovaSheet ? 'Hide Info' : 'Learn More'" tooltip-location="start">
+            :tooltip-text="showNovaSheet ? 'Hide Info' : 'Learn About Novas'" tooltip-location="start">
           </icon-button>
           <icon-button v-model="showUseSheet" fa-icon="info" :color="buttonColor"
-            :tooltip-text="showUseSheet ? 'Hide Info' : 'Learn More'" tooltip-location="start">
+            :tooltip-text="showUseSheet ? 'Hide Info' : 'How to Navigate'" tooltip-location="start">
           </icon-button>
           <!-- <icon-button v-model="showVideoSheet" fa-icon="video" :color="buttonColor" tooltip-text="Watch video"
             tooltip-location="start">
