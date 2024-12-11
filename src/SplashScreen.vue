@@ -2,27 +2,44 @@
   <v-overlay :model-value="showSplashScreen" absolute opacity="0.6" :style="props.cssVars" id="splash-overlay">
     <focus-trap>
       <div id="splash-screen" v-click-outside="closeSplashScreen" :style="props.cssVars">
-        <font-awesome-icon
-          id="close-splash-button" 
-          class="tab-focusable"
-          icon="xmark"
-          @click="closeSplashScreen" 
-          @keyup.enter="closeSplashScreen"
-          tabindex="0" 
-        />
-        <div id="splash-screen-text">
-          <div class="highlight">Blaze Star Nova</div>
-          <div class="burst">Learn where in the sky to watch for a "new" star!</div>
-        </div>
-        <div id="splash-screen-acknowledgements" class="splash-screen-small">
-          <div id="links">
-            This Data Story is brought to you by <a href="https://www.cosmicds.cfa.harvard.edu/" target="_blank" rel="noopener noreferrer" class="no-wrap">Cosmic Data Stories</a> and <a href="https://www.worldwidetelescope.org/home/" target="_blank" rel="noopener noreferrer" class="no-wrap">WorldWide Telescope</a>.
+        <div id="splash-screen-container">
+          <font-awesome-icon
+            id="close-splash-button" 
+            class="tab-focusable"
+            icon="xmark"
+            @click="closeSplashScreen" 
+            @keyup.enter="closeSplashScreen"
+            tabindex="0" 
+          />
+          <div id="splash-screen-text">
+            <div class="highlight">Blaze Star Nova</div>
+            <div class="burst">Learn where in the sky to watch for a "new" star!</div>
           </div>
-          <div id="splash-screen-logos">
-            <credit-logos logo-size="4vmax" />
+
+          <div>
+            <v-btn
+              class="splash-get-started"
+              @click="closeSplashScreen"
+              :color="accentColor"
+              density="default"
+              size="x-large"
+              variant="elevated"
+              rounded="lg"
+            >
+              Get Started
+            </v-btn>
           </div>
-          <div id="image-credit">
-            Image credit: NASA / Goddard Space Flight Center
+
+          <div id="splash-screen-acknowledgements" class="splash-screen-small">
+            <div id="links">
+              This Data Story is brought to you by <a href="https://www.cosmicds.cfa.harvard.edu/" target="_blank" rel="noopener noreferrer" class="no-wrap">Cosmic Data Stories</a> and <a href="https://www.worldwidetelescope.org/home/" target="_blank" rel="noopener noreferrer" class="no-wrap">WorldWide Telescope</a>.
+            </div>
+            <div id="splash-screen-logos">
+              <credit-logos logo-size="4vmax" />
+            </div>
+            <div id="image-credit">
+              Image credit: NASA / Goddard Space Flight Center
+            </div>
           </div>
         </div>
       </div>
@@ -31,6 +48,8 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue";
+
 export interface Props {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   cssVars?: any;
@@ -44,6 +63,7 @@ const emits = defineEmits(['close']);
 
 const showSplashScreen = defineModel({default: true});
 
+const accentColor = ref("#f7bb48");
 
 function closeSplashScreen() {
   showSplashScreen.value = false;
@@ -84,8 +104,6 @@ function closeSplashScreen() {
   border-radius: 30px;
   border: min(1.2vw, 0.9vh) solid var(--accent-color);
   overflow: auto;
-  padding-top: 4rem;
-  padding-bottom: 2rem;
 
   @media (max-width: 699px) {
     max-height: 80vh;
@@ -97,9 +115,15 @@ function closeSplashScreen() {
     max-width: min(65vw, 800px);
   }
 
-  div:not(#close-splash-button, #splash-screen-acknowledgements) {
+  div:not(#splash-screen-container, #close-splash-button, #splash-screen-acknowledgements) {
     margin-inline: 5%;
     text-align: center;
+  }
+
+  #splash-screen-container {
+    padding-top: 4rem;
+    padding-bottom: 2rem;
+    background-color: rgba(0, 0, 0, 0.5);
   }
   
   .highlight {
@@ -116,12 +140,11 @@ function closeSplashScreen() {
   }
 
   .burst {
-    background-color: rgba(255, 255, 255, 0.4);
+    color: white;
     border-radius: 15px;
     margin: 1rem;
-    padding: 1rem;
     line-height: 1.2;
-    font-size: min(0.9em, 5vw)
+    font-size: min(0.8em, 4vw)
   }
 
   .splash-screen-small {
@@ -130,8 +153,21 @@ function closeSplashScreen() {
     margin-top: 1rem;
   }
   
+  .splash-get-started {
+    border: 2px solid white;
+    font-size: 1.5rem;
+    margin-top: 5%;
+    margin-bottom: 2%;
+    font-weight: bold !important;
+  }
+
   #splash-screen-acknowledgements {
-    background-color: rgba(0, 0, 0, 0.5);
+
+    margin-top: 3vh;
+    font-size: 2rem;
+    line-height: 2rem;
+    // width: 60%; 
+
     color: white;
     padding: 1rem;
     margin-bottom: 2rem;
